@@ -17,7 +17,7 @@ const collectionName = "books";
 const collection = new Library(url, dbName, collectionName);
 
 // get route to fetch all books
-app.get("/bringmeallthestuff", async (req, res) => {
+app.get("bringmealldata", async (req, res) => {
   try {
     const allBooks = await collection.allBooks();
     res.json(allBooks);
