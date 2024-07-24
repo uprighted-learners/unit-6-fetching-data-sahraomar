@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+  </head>
+  <body>
+    <h1>Library</h1>
+
+    <h2>All Books</h2>
+    <div id="books"></div>
+
+    <h2>Add a New Book</h2>
+    <form action="/addnewstuff" method="POST">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" required /><br />
+      <label for="author">Author:</label>
+      <input type="text" id="author" name="author" required /><br />
+      <label for="copies">Copies:</label>
+      <input type="number" id="copies" name="copies" required /><br />
+      <button type="submit">Add Book</button>
+    </form>
+
+    <h2>Update a Book</h2>
+    <form action="/updatestuff" method="POST">
+      <label for="id">Book ID:</label>
+      <input type="text" id="id" name="id" required /><br />
+      <label for="newInfo">New Info:</label>
+      <input type="text" id="newInfo" name="newInfo" required /><br />
+      <button type="submit">Update Book</button>
+    </form>
+
+    <script>
+      // Fetch all books and display them
+      async function fetchBooks() {
+        const response = await fetch("/bringmeallthestuff");
+        const books = await response.json();
+        const booksDiv = document.getElementById("books");
+        booksDiv.innerHTML = ""; // Clear previous content
+        books.map((book) => {
+          const bookElement = document.createElement("div");
+          bookElement.innerText = `Title: ${book.title}, Author: ${book.author}, Copies: ${book.copies}`;
+          booksDiv.appendChild(bookElement);
+        });
+      }
+
+      // Fetch books when the page loads
+      window.onload = fetchBooks;
+    </script>
+  </body>
+</html>
